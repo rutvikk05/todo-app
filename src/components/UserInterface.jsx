@@ -3,27 +3,32 @@ import DisplayTask from './DisplayTask'
 import InputTask from './InputTask'
 
 const UserInterface = () => {
-    const [isChecked, setIsChecked] = useState(false);
+  
     const [showInput, setShowInput] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    const [tasks, setTasks] = useState([]);
+
+
   
     const handleInputChange = (event) => {
         setInputValue((event.target.value));
       };
 
     const handleClick = () => {
-     setShowInput(true)     
+        setTasks([...tasks, inputValue]);
+        setShowInput(true);         
     }
 
     return (
-    <div className='flex flex-col items-center justify-center bg-green-200 w-[100vw] h-[100vh]'>
+    <div className='flex flex-col items-center justify-center bg-black w-[100vw] h-[100vh]'>
+      <h1 className='text-white text-3xl mb-[50px] font-bold text-center '> Todo App </h1>
      <InputTask onInputChange = {handleInputChange} onBtnClick = {handleClick} />
-      
-     { showInput && inputValue (
-  <DisplayTask inputValue={inputValue}
-                      />
+  
+  { showInput && (
+  <DisplayTask tasks={tasks} />
 )}
 
+  
     </div>
   )
 }
